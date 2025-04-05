@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ nombre }} - CV</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      color: #2c3e50;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      max-width: 1000px;
+      margin: auto;
+      background-color: white;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    aside {
+      background-color: #1f2d3d;
+      color: white;
+      padding: 30px;
+    }
+    aside h2 {
+      font-size: 16px;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #34495e;
+      padding-bottom: 4px;
+    }
+    aside p, aside li {
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    aside ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    aside a {
+      color: #1abc9c;
+      word-break: break-word;
+    }
+    main {
+      padding: 40px;
+    }
+    main h1 {
+      font-size: 26px;
+      color: #2c3e50;
+    }
+    main h2 {
+      font-size: 18px;
+      margin-top: 30px;
+      color: #007BFF;
+      border-bottom: 2px solid #007BFF33;
+      padding-bottom: 6px;
+    }
+    main h3 {
+      font-size: 15px;
+      margin-top: 15px;
+    }
+    main p {
+      font-size: 14px;
+      margin: 6px 0 10px;
+    }
+    main ul {
+      padding-left: 18px;
+      margin-bottom: 12px;
+    }
+    main ul li {
+      font-size: 14px;
+      margin-bottom: 6px;
+      page-break-inside: avoid;
+    }
+    .section {
+      page-break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside>
+      <h2>Contacto</h2>
+      <p>📧 {{ contacto.email }}</p>
+      <p>📞 {{ contacto.telefono }}</p>
+      <p>📍 {{ contacto.direccion }}</p>
+      {% if contacto.linkedin %}
+      <p>🔗 <a href="{{ contacto.linkedin }}">{{ contacto.linkedin }}</a></p>
+      {% endif %}
+
+      {% if habilidades %}
+      <h2>Habilidades</h2>
+      <ul>{% for hab in habilidades %}{% if hab.strip() and hab.strip() != '•' %}<li>{{ hab | replace('•', '') }}</li>{% endif %}{% endfor %}</ul>
+      {% endif %}
+
+      {% if idiomas %}
+      <h2>Idiomas</h2>
+      <ul>{% for idi in idiomas %}{% if idi.strip() and idi.strip() != '•' %}<li>{{ idi | replace('•', '') }}</li>{% endif %}{% endfor %}</ul>
+      {% endif %}
+
+      {% if certificaciones %}
+      <h2>Certificaciones</h2>
+      <ul>{% for cert in certificaciones %}{% if cert.strip() and cert.strip() != '•' %}<li>{{ cert | replace('•', '') }}</li>{% endif %}{% endfor %}</ul>
+      {% endif %}
+    </aside>
+
+    <main>
+      <h1>{{ nombre }}</h1>
+      <p><strong>{{ titulo }}</strong></p>
+      <p>{{ resumen }}</p>
+
+      {% if experiencia %}
+      <h2>💼 Experiencia Profesional</h2>
+      <section>
+        {% for exp in experiencia %}
+          <h3>{{ exp.puesto }} - {{ exp.empresa }}</h3>
+          <p><em>{{ exp.fecha }}</em></p>
+          <ul>{% for item in exp.descripcion %}{% if item.strip() and item.strip() != '•' %}<li>{{ item | replace('•', '') }}</li>{% endif %}{% endfor %}</ul>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      {% if educacion %}
+      <h2>🎓 Educación</h2>
+      <section>
+        {% for edu in educacion %}
+          <h3>{{ edu.titulo }} - {{ edu.centro }}</h3>
+          <p><em>{{ edu.fecha }}</em></p>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      {% if proyectos_personales %}
+      <h2>🔧 Proyectos Personales</h2>
+      <section>
+        <ul>{% for proj in proyectos_personales %}{% if proj.strip() and proj.strip() != '•' %}<li>{{ proj | replace('•', '') }}</li>{% endif %}{% endfor %}</ul>
+      </section>
+      {% endif %}
+    </main>
+  </div>
+</body>
+</html>

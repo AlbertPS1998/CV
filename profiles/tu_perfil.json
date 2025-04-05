@@ -1,0 +1,17 @@
+{
+  "nombre": "Nombre Apellido",
+  "titulo": "Tu puesto ideal",
+  "resumen": "Descripción breve de tu perfil profesional.",
+  "contacto": {
+    "email": "nombre@email.com",
+    "telefono": "+00 000 000 000",
+    "direccion": "Ciudad, País",
+    "linkedin": "https://www.linkedin.com/in/nombre"
+  },
+  "habilidades": ["Habilidad 1", "Habilidad 2"],
+  "idiomas": ["Español – Nativo", "Inglés – Avanzado"],
+  "experiencia": [],
+  "educacion": [],
+  "certificaciones": [],
+  "proyectos_personales": []
+}
